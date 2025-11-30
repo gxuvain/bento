@@ -1,0 +1,67 @@
+<script setup lang="ts">
+import type { AuthFormField, FormSubmitEvent } from "@nuxt/ui";
+
+import * as z from "zod";
+
+import { authClient } from "~/lib/auth-client";
+
+const fields: AuthFormField[] = [{
+  name: "email",
+  type: "email",
+  label: "Email",
+  placeholder: "Enter your email",
+  required: true,
+}, {
+  name: "password",
+  label: "Password",
+  type: "password",
+  placeholder: "Enter your password",
+  required: true,
+}, {
+  name: "remember",
+  label: "Remember me",
+  type: "checkbox",
+}];
+
+const providers = [{
+  label: "GitHub",
+  icon: "i-simple-icons-github",
+  onClick: () => {
+    authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/app",
+      errorCallbackURL: "/error",
+    });
+  },
+}];
+
+const schema = z.object({
+  email: z.email("Invalid email"),
+  password: z.string("Password is required").min(8, "Must be at least 8 characters"),
+});
+
+type Schema = z.output<typeof schema>;
+
+function onSubmit(payload: FormSubmitEvent<Schema>) {
+  authClient.signIn.email({
+    email: payload.data.email,
+    password: payload.data.password,
+  });
+}
+</script>
+
+<template>
+  <div class="flex flex-col items-center justify-center gap-4 p-4">
+    <UPageCard class="w-full max-w-md">
+      <UAuthForm
+        :schema="schema"
+        title="Login"
+        description="Enter your credentials to access your account."
+        icon="i-lucide-user"
+        :fields="fields"
+        :providers="providers"
+        @submit="onSubmit"
+      />
+    </UPageCard>
+  </div>
+</template>
