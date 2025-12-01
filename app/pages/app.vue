@@ -1,7 +1,7 @@
 <template>
   <UPageHero
-    title="Welcome on Tremplin"
-    description="Dead simple Nuxt stater kit, because you dont have the time..."
+    title="Welcome on Bento"
+    description="🍱lunchbox for your Nuxt app"
     headline="Currently in development"
   />
 </template>

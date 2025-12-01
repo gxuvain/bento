@@ -1,6 +1,6 @@
-# Tremplin
+# 🍱Bento
 
-Dead simple Nuxt stater kit, because you dont have the time...
+🍱lunchbox for your Nuxt app
 
 ## Setup
 
