@@ -1,6 +1,6 @@
 # 🍱Bento
 
-🍱lunchbox for your Nuxt app
+lunchbox for your Nuxt app
 
 ## Setup
 
