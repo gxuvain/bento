@@ -5,16 +5,16 @@ import db from "./db";
 import env from "./env";
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, {
-    provider: "sqlite",
-  }),
-  emailAndPassword: {
-    enabled: true,
-  },
-  socialProviders: {
-    github: {
-      clientId: env.GITHUB_CLIENT_ID as string,
-      clientSecret: env.GITHUB_CLIENT_SECRET as string,
-    },
-  },
+	database: drizzleAdapter(db, {
+		provider: "sqlite",
+	}),
+	emailAndPassword: {
+		enabled: true,
+	},
+	socialProviders: {
+		github: {
+			clientId: env.GITHUB_CLIENT_ID as string,
+			clientSecret: env.GITHUB_CLIENT_SECRET as string,
+		},
+	},
 });

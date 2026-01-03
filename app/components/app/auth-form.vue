@@ -5,7 +5,7 @@ import * as z from "zod";
 
 import { authClient } from "~/lib/auth-client";
 
-const fields: AuthFormField[] = [
+const _fields: AuthFormField[] = [
 	{
 		name: "email",
 		type: "email",
@@ -27,7 +27,7 @@ const fields: AuthFormField[] = [
 	},
 ];
 
-const providers = [
+const _providers = [
 	{
 		label: "GitHub",
 		icon: "i-simple-icons-github",
@@ -50,7 +50,7 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>;
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
+function _onSubmit(payload: FormSubmitEvent<Schema>) {
 	authClient.signIn.email({
 		email: payload.data.email,
 		password: payload.data.password,
@@ -66,9 +66,9 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         title="Login"
         description="Enter your credentials to access your account."
         icon="i-lucide-user"
-        :fields="fields"
-        :providers="providers"
-        @submit="onSubmit"
+        :fields="_fields"
+        :providers="_providers"
+        @submit="_onSubmit"
       />
     </UPageCard>
   </div>
