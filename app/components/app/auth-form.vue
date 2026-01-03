@@ -5,48 +5,56 @@ import * as z from "zod";
 
 import { authClient } from "~/lib/auth-client";
 
-const fields: AuthFormField[] = [{
-  name: "email",
-  type: "email",
-  label: "Email",
-  placeholder: "Enter your email",
-  required: true,
-}, {
-  name: "password",
-  label: "Password",
-  type: "password",
-  placeholder: "Enter your password",
-  required: true,
-}, {
-  name: "remember",
-  label: "Remember me",
-  type: "checkbox",
-}];
+const fields: AuthFormField[] = [
+	{
+		name: "email",
+		type: "email",
+		label: "Email",
+		placeholder: "Enter your email",
+		required: true,
+	},
+	{
+		name: "password",
+		label: "Password",
+		type: "password",
+		placeholder: "Enter your password",
+		required: true,
+	},
+	{
+		name: "remember",
+		label: "Remember me",
+		type: "checkbox",
+	},
+];
 
-const providers = [{
-  label: "GitHub",
-  icon: "i-simple-icons-github",
-  onClick: () => {
-    authClient.signIn.social({
-      provider: "github",
-      callbackURL: "/app",
-      errorCallbackURL: "/error",
-    });
-  },
-}];
+const providers = [
+	{
+		label: "GitHub",
+		icon: "i-simple-icons-github",
+		onClick: () => {
+			authClient.signIn.social({
+				provider: "github",
+				callbackURL: "/app",
+				errorCallbackURL: "/error",
+			});
+		},
+	},
+];
 
 const schema = z.object({
-  email: z.email("Invalid email"),
-  password: z.string("Password is required").min(8, "Must be at least 8 characters"),
+	email: z.email("Invalid email"),
+	password: z
+		.string("Password is required")
+		.min(8, "Must be at least 8 characters"),
 });
 
 type Schema = z.output<typeof schema>;
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
-  authClient.signIn.email({
-    email: payload.data.email,
-    password: payload.data.password,
-  });
+	authClient.signIn.email({
+		email: payload.data.email,
+		password: payload.data.password,
+	});
 }
 </script>
 
